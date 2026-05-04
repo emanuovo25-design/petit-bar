@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Petit Bar — Gravedona ed Uniti</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=DM+Sans:wght@300;400;600&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--o:#E8821A;--od:#C4660D;--oc:#F5A94A;--dark:#1C0E05;--mid:#3A2010;--cream:#FDF6EC;--gray:#8A7060;--white:#fff}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--cream);color:var(--dark);overflow-x:hidden}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:200;display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:rgba(28,14,5,0.92);backdrop-filter:blur(10px);border-bottom:1px solid rgba(232,130,26,0.2)}
+.nav-logo{font-family:'Playfair Display',serif;font-size:1.3rem;color:#fff;text-decoration:none;font-style:italic}.nav-logo b{color:var(--o);font-style:normal}
+.nav-links{display:flex;gap:1.8rem;list-style:none}
+.nav-links a{color:rgba(255,255,255,0.6);text-decoration:none;font-size:0.8rem;letter-spacing:0.1em;text-transform:uppercase;transition:color .2s}
+.nav-links a:hover{color:var(--o)}
+.nav-tel{background:var(--o);color:#fff;text-decoration:none;font-size:0.78rem;font-weight:600;padding:0.5rem 1.2rem;border-radius:50px;letter-spacing:0.05em;transition:background .2s}
+.nav-tel:hover{background:var(--od)}
+
+.hero{min-height:100vh;background:var(--dark);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;text-align:center}
+.hero-glow{position:absolute;width:700px;height:700px;border-radius:50%;background:radial-gradient(circle,rgba(232,130,26,0.22) 0%,transparent 70%);top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none}
+.hero-content{position:relative;padding:2rem}
+.hero-tag{display:inline-block;border:1px solid rgba(232,130,26,0.5);color:var(--oc);font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;padding:0.4rem 1.2rem;border-radius:50px;margin-bottom:2rem}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(5rem,16vw,11rem);font-weight:700;color:#fff;line-height:0.88;letter-spacing:-0.03em;margin-bottom:0.2em}
+.hero h1 em{color:var(--o);font-style:italic;display:block}
+.hero-sub{color:rgba(255,255,255,0.4);font-size:0.95rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:3rem}
+.hero-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:0.5rem;padding:0.85rem 2rem;border-radius:50px;font-size:0.85rem;font-weight:600;text-decoration:none;letter-spacing:0.05em;transition:all .25s;cursor:pointer;border:none}
+.btn-primary{background:var(--o);color:#fff}.btn-primary:hover{background:var(--od);transform:translateY(-2px)}
+.btn-outline{background:transparent;color:#fff;border:1px solid rgba(255,255,255,0.3)}.btn-outline:hover{border-color:var(--o);color:var(--o)}
+.hero-scroll{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);color:rgba(255,255,255,0.25);font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;animation:bob 2s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;gap:0.4rem}
+.hero-scroll::after{content:'';width:1px;height:35px;background:linear-gradient(to bottom,rgba(255,255,255,0.2),transparent)}
+@keyframes bob{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+.evento-banner{background:linear-gradient(135deg,var(--od) 0%,var(--o) 50%,var(--oc) 100%);padding:5rem 1.5rem;text-align:center;position:relative;overflow:hidden}
+.evento-banner::before{content:'🦪';position:absolute;font-size:15rem;opacity:0.07;top:50%;left:10%;transform:translateY(-50%)}
+.evento-banner::after{content:'🥂';position:absolute;font-size:12rem;opacity:0.07;top:50%;right:8%;transform:translateY(-50%)}
+.evento-label{display:inline-block;background:rgba(255,255,255,0.2);border:1px solid rgba(255,255,255,0.4);color:#fff;font-size:0.72rem;letter-spacing:0.3em;text-transform:uppercase;padding:0.4rem 1.2rem;border-radius:50px;margin-bottom:1.5rem}
+.evento-banner h2{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,8vw,5rem);font-weight:700;color:#fff;line-height:1;margin-bottom:1rem}
+.evento-banner p{color:rgba(255,255,255,0.85);font-size:1.1rem;margin-bottom:2rem}
+.evento-pill{display:inline-flex;align-items:center;gap:0.6rem;background:rgba(255,255,255,0.15);border:2px solid rgba(255,255,255,0.6);color:#fff;font-weight:600;font-size:0.9rem;padding:0.8rem 2rem;border-radius:50px;backdrop-filter:blur(4px)}
+
+.menu-section{padding:5rem 1.5rem;background:#fff}
+.section-header{text-align:center;margin-bottom:3rem}
+.section-label{font-size:0.7rem;letter-spacing:0.3em;text-transform:uppercase;color:var(--o);font-weight:600;margin-bottom:0.6rem}
+.section-title{font-family:'Playfair Display',serif;font-size:clamp(2rem,5vw,3rem);font-weight:700;color:var(--dark)}
+.section-title em{color:var(--o);font-style:italic}
+
+.tabs{display:flex;justify-content:center;flex-wrap:wrap;gap:0.5rem;margin-bottom:3rem}
+.tab{padding:0.6rem 1.4rem;border-radius:50px;font-size:0.82rem;font-weight:600;letter-spacing:0.05em;cursor:pointer;border:2px solid #e8e0d8;background:transparent;color:var(--gray);transition:all .2s}
+.tab.active,.tab:hover{background:var(--o);border-color:var(--o);color:#fff}
+.tab-content{display:none;max-width:900px;margin:0 auto;animation:fadeIn .3s ease}
+.tab-content.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+.menu-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:1.5rem}
+.menu-card{background:var(--cream);border-radius:12px;padding:1.5rem;border:1px solid rgba(0,0,0,0.06)}
+.menu-card-title{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--dark);margin-bottom:1rem;padding-bottom:0.6rem;border-bottom:2px solid var(--o);display:flex;align-items:center;gap:0.5rem}
+.menu-item{display:flex;justify-content:space-between;align-items:baseline;padding:0.4rem 0;border-bottom:1px dashed rgba(0,0,0,0.07);font-size:0.87rem}
+.menu-item:last-child{border-bottom:none}
+.item-name{color:var(--dark);flex:1}
+.item-desc{color:var(--gray);font-size:0.77rem;display:block;margin-top:0.1rem}
+.item-price{color:var(--o);font-weight:700;font-size:0.9rem;margin-left:1rem;white-space:nowrap}
+.menu-note{text-align:center;margin-top:1.5rem;font-size:0.82rem;color:var(--gray);background:var(--cream);padding:0.8rem 1.5rem;border-radius:8px;display:inline-block}
+
+.info-strip{background:var(--mid);color:#fff;padding:4rem 1.5rem}
+.info-strip-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:2rem;max-width:1000px;margin:0 auto;text-align:center}
+.info-item-icon{font-size:2rem;margin-bottom:0.8rem}
+.info-item-label{font-size:0.68rem;letter-spacing:0.25em;text-transform:uppercase;color:var(--oc);margin-bottom:0.4rem}
+.info-item-val{font-size:1rem;color:#fff;font-weight:500;line-height:1.6}
+.info-item-val a{color:#fff;text-decoration:none}.info-item-val a:hover{color:var(--oc)}
+
+.orari-section{padding:4rem 1.5rem;background:var(--cream)}
+.orari-grid{display:grid;grid-template-columns:1fr 1fr;gap:3rem;max-width:800px;margin:0 auto;align-items:start}
+.orari-table{width:100%;border-collapse:collapse;margin-top:1rem}
+.orari-table tr{border-bottom:1px solid rgba(0,0,0,0.06)}
+.orari-table td{padding:0.6rem 0;font-size:0.9rem}
+.orari-table td:first-child{color:var(--gray)}
+.orari-table td:last-child{text-align:right;font-weight:600;color:var(--mid)}
+td.chiuso{color:#c0392b !important}
+.map-box{background:var(--mid);border-radius:12px;height:250px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0.8rem;text-align:center;padding:1.5rem;margin-top:1rem}
+.map-box p{color:rgba(255,255,255,0.6);font-size:0.85rem}
+.map-box a{color:var(--oc);font-weight:600;text-decoration:none;font-size:0.9rem}
+
+footer{background:var(--dark);color:rgba(255,255,255,0.4);text-align:center;padding:2rem;font-size:0.8rem}
+footer a{color:var(--o);text-decoration:none}
+
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .6s,transform .6s}
+.reveal.visible{opacity:1;transform:none}
+
+@media(max-width:680px){
+  .nav-links{display:none}
+  .orari-grid{grid-template-columns:1fr;gap:2rem}
+  .hero h1{font-size:clamp(4rem,18vw,6rem)}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#"><b>Petit</b> Bar</a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menù</a></li>
+    <li><a href="#venerdi">Venerdì</a></li>
+    <li><a href="#orari">Orari</a></li>
+    <li><a href="#contatti">Contatti</a></li>
+  </ul>
+  <a class="nav-tel" href="tel:+393483618739">📞 348 361 8739</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="hero-content">
+    <div class="hero-tag">Gravedona ed Uniti · Lago di Como</div>
+    <h1>Petit<em>Bar</em></h1>
+    <p class="hero-sub">Caffè · Pranzo · Aperitivi · Serate</p>
+    <div class="hero-btns">
+      <a href="#menu" class="btn btn-primary">🍽️ Vedi il Menù</a>
+      <a href="#venerdi" class="btn btn-outline">🦪 Serata Venerdì</a>
+    </div>
+  </div>
+  <div class="hero-scroll">Scorri</div>
+</section>
+
+<section class="evento-banner" id="venerdi">
+  <div class="evento-label">Ogni venerdì sera</div>
+  <h2>🦪 Ostriche &amp; Spumante</h2>
+  <p>Una serata speciale ogni venerdì — ostriche fresche e bollicine</p>
+  <div class="evento-pill">📅 Ogni venerdì sera &nbsp;·&nbsp; Posti limitati &nbsp;·&nbsp; Prenota: 348 361 8739</div>
+</section>
+
+<section class="menu-section" id="menu">
+  <div class="section-header reveal">
+    <p class="section-label">Cosa offriamo</p>
+    <h2 class="section-title">Il nostro <em>Menù</em></h2>
+  </div>
+  <div class="tabs">
+    <button class="tab active" onclick="showTab('caffetteria',this)">☕ Caffetteria</button>
+    <button class="tab" onclick="showTab('pranzo',this)">🍽️ Pranzo</button>
+    <button class="tab" onclick="showTab('aperitivi',this)">🍹 Drink</button>
+    <button class="tab" onclick="showTab('vini',this)">🍷 Vini</button>
+    <button class="tab" onclick="showTab('birre',this)">🍺 Birre</button>
+  </div>
+
+  <div class="tab-content active" id="tab-caffetteria">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-title">☕ Caffetteria</div>
+        <div class="menu-item"><span class="item-name">Caffè</span><span class="item-price">1.30€</span></div>
+        <div class="menu-item"><span class="item-name">Cappuccino</span><span class="item-price">1.80€</span></div>
+        <div class="menu-item"><span class="item-name">Caffè Corretto</span><span class="item-price">1.40€</span></div>
+        <div class="menu-item"><span class="item-name">Ginseng / Orzo piccolo</span><span class="item-price">1.50€</span></div>
+        <div class="menu-item"><span class="item-name">Ginseng / Orzo grande</span><span class="item-price">2.00€</span></div>
+        <div class="menu-item"><span class="item-name">Decaffeinato</span><span class="item-price">1.30€</span></div>
+        <div class="menu-item"><span class="item-name">Latte Macchiato</span><span class="item-price">2.50€</span></div>
+        <div class="menu-item"><span class="item-name">Tè / Tisane</span><span class="item-price">2.00€</span></div>
+        <div class="menu-item"><span class="item-name">Cioccolata</span><span class="item-price">3.00€</span></div>
+        <div class="menu-item"><span class="item-name">Cioccolata con Panna</span><span class="item-price">3.50€</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-title">🥐 Colazione</div>
+        <div class="menu-item"><span class="item-name">Brioche</span><span class="item-price">1.50€</span></div>
+        <div class="menu-item"><span class="item-name">Pasticciotti</span><span class="item-price">1.50€</span></div>
+        <div class="menu-item"><span class="item-name">Crostata Integrale</span><span class="item-price">2.50€</span></div>
+        <div class="menu-card-title" style="margin-top:1.2rem">🧃 Bevande</div>
+        <div class="menu-item"><span class="item-name">Acqua</span><span class="item-price">2.00€</span></div>
+        <div class="menu-item"><span class="item-name">Coca Cola / Aranciata / Limonata / Tonica</span><span class="item-price">3.50€</span></div>
+        <div class="menu-item"><span class="item-name">Red Bull</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Tè Limone / Pesca (lattina)</span><span class="item-price">3.50€</span></div>
+        <div class="menu-item"><span class="item-name">Succhi <span class="item-desc">Ace, pera, pesca, albicocca, ananas, mela</span></span><span class="item-price">3.50€</span></div>
+        <div class="menu-item"><span class="item-name">Succo Mirtillo</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Spremuta Fresca</span><span class="item-price">4.00€</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-pranzo">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-title">🍝 Primi Piatti</div>
+        <div class="menu-item"><span class="item-name">Lasagne alla Bolognese</span><span class="item-price">9.00€</span></div>
+        <div class="menu-item"><span class="item-name">Pizzoccheri Valtellinesi</span><span class="item-price">9.00€</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-title">🥪 Panini, Piadine &amp; Focacce — 6.50€</div>
+        <div class="menu-item"><span class="item-name">Delizia al Cotto <span class="item-desc">cotto, mozzarella, insalata, pomodori, maionese</span></span></div>
+        <div class="menu-item"><span class="item-name">Il Sogno del Crudo <span class="item-desc">crudo, brie, mozzarella, pomodori, insalata, salsa rosa</span></span></div>
+        <div class="menu-item"><span class="item-name">Il Classico Salame <span class="item-desc">salame, mozzarella, maionese</span></span></div>
+        <div class="menu-item"><span class="item-name">Nettuno <span class="item-desc">tonno, mozzarella, pomodori, insalata, salsa rosa</span></span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-title">🍞 Maxi Toast</div>
+        <div class="menu-item"><span class="item-name">Liscio <span class="item-desc">cotto e formaggio</span></span><span class="item-price">5.00€</span></div>
+        <div class="menu-item"><span class="item-name">Farcito <span class="item-desc">cotto, formaggio, pomodori, salsa a scelta</span></span><span class="item-price">5.50€</span></div>
+        <div class="menu-card-title" style="margin-top:1.2rem">🍕 Pizze</div>
+        <div class="menu-item"><span class="item-name">Margherita</span><span class="item-price">7.00€</span></div>
+        <div class="menu-item"><span class="item-name">Prosciutto Cotto</span><span class="item-price">7.50€</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-title">🥗 Insalatone — 7.00€</div>
+        <div class="menu-item"><span class="item-name">Insalata, pomodori, mais, formaggio</span></div>
+        <div class="menu-item"><span class="item-name">Insalata, pomodori, tonno, mais</span></div>
+        <div class="menu-card-title" style="margin-top:1.2rem">🧀 Piatti Freddi — 8.00€</div>
+        <div class="menu-item"><span class="item-name">Caprese con glassa di aceto balsamico</span></div>
+        <div class="menu-item"><span class="item-name">Carpaccio di Bresaola, scaglie di Grana, olio e pepe</span></div>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:1rem"><span class="menu-note">Coperto 1.50€</span></div>
+  </div>
+
+  <div class="tab-content" id="tab-aperitivi">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-title">🍹 Cocktail</div>
+        <div class="menu-item"><span class="item-name">Spritz Aperol</span><span class="item-price">6.00€</span></div>
+        <div class="menu-item"><span class="item-name">Spritz Campari</span><span class="item-price">7.00€</span></div>
+        <div class="menu-item"><span class="item-name">Mojito</span><span class="item-price">7.00€</span></div>
+        <div class="menu-item"><span class="item-name">Gin Tonic / Lemon</span><span class="item-price">7.00€</span></div>
+        <div class="menu-item"><span class="item-name">S.Kinotto</span><span class="item-price">7.00€</span></div>
+        <div class="menu-item"><span class="item-name">Negroni</span><span class="item-price">7.00€</span></div>
+        <div class="menu-item"><span class="item-name">Campari Soda</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Vodka Tonic / Lemon</span><span class="item-price">7.00€</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-title">🫧 Analcolici</div>
+        <div class="menu-item"><span class="item-name">Portofino (25cl)</span><span class="item-price">6.00€</span></div>
+        <div class="menu-item"><span class="item-name">Crodino (10cl)</span><span class="item-price">3.50€</span></div>
+        <div class="menu-item"><span class="item-name">Sanbitter (10cl)</span><span class="item-price">3.50€</span></div>
+        <div class="menu-item"><span class="item-name">Corona Zero Alcool</span><span class="item-price">4.00€</span></div>
+        <div class="menu-card-title" style="margin-top:1.2rem">🥃 Amari &amp; Grappe</div>
+        <div class="menu-item"><span class="item-name">Amari Classici</span><span class="item-price">3.50€</span></div>
+        <div class="menu-item"><span class="item-name">Grappa Bianca / Barricata</span><span class="item-price">3.50 / 4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Rum / Whiskey</span><span class="item-price">5.00€</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-vini">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-title">🍷 Rossi &amp; Rosato al Calice</div>
+        <div class="menu-item"><span class="item-name">Nero d'Avola</span><span class="item-price">5.00€</span></div>
+        <div class="menu-item"><span class="item-name">Toscano Still Novo Banfi</span><span class="item-price">5.00€</span></div>
+        <div class="menu-item"><span class="item-name">Rosato San Francesco</span><span class="item-price">4.00€</span></div>
+        <div class="menu-card-title" style="margin-top:1.2rem">🥂 Bianchi al Calice</div>
+        <div class="menu-item"><span class="item-name">Lugana</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Friulano Cantina Valle</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Prosecco Valdobbiadene S.Margherita</span><span class="item-price">4.00€</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-title">🍾 Bottiglie — Rossi</div>
+        <div class="menu-item"><span class="item-name">Toscano Stil Novo Banfi</span><span class="item-price">25€</span></div>
+        <div class="menu-item"><span class="item-name">Valpolicella Ripasso Bertani</span><span class="item-price">25€</span></div>
+        <div class="menu-item"><span class="item-name">Cannonau Su Entu</span><span class="item-price">25€</span></div>
+        <div class="menu-item"><span class="item-name">Nero d'Avola Passo D.Mule</span><span class="item-price">25€</span></div>
+        <div class="menu-item"><span class="item-name">Cirò Rosato San Francesco</span><span class="item-price">22€</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-title">🍾 Bottiglie — Bianchi &amp; Bollicine</div>
+        <div class="menu-item"><span class="item-name">Lugana Fraccaroli</span><span class="item-price">22€</span></div>
+        <div class="menu-item"><span class="item-name">Traminer Cantina Valle</span><span class="item-price">22€</span></div>
+        <div class="menu-item"><span class="item-name">Friulano Cantina Valle</span><span class="item-price">22€</span></div>
+        <div class="menu-item"><span class="item-name">Valdobbiadene S.Margherita</span><span class="item-price">22€</span></div>
+        <div class="menu-item"><span class="item-name">Bortolomiol Senior</span><span class="item-price">22€</span></div>
+        <div class="menu-item"><span class="item-name">Bisol Jeio</span><span class="item-price">22€</span></div>
+        <div class="menu-item"><span class="item-name">Cá di Rajo / Cá di Rajo Brut</span><span class="item-price">22€</span></div>
+        <div class="menu-item"><span class="item-name">Influssi di Luna</span><span class="item-price">22€</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tab-content" id="tab-birre">
+    <div class="menu-grid">
+      <div class="menu-card">
+        <div class="menu-card-title">🍺 Alla Spina</div>
+        <div class="menu-item"><span class="item-name">Altenmünster Lager</span><span class="item-price">3.50 / 5.00€</span></div>
+      </div>
+      <div class="menu-card">
+        <div class="menu-card-title">🍺 In Bottiglia</div>
+        <div class="menu-item"><span class="item-name">Norbertus Weiss (500ml)</span><span class="item-price">6.00€</span></div>
+        <div class="menu-item"><span class="item-name">Tennent's Super</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Löwenbräu</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Peroni Capri</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Nastro Azzurro</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Heineken</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Corona</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Menabrea Ambrata</span><span class="item-price">4.00€</span></div>
+        <div class="menu-item"><span class="item-name">Corona Zero Alcool</span><span class="item-price">4.00€</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="info-strip" id="contatti">
+  <div class="info-strip-grid">
+    <div class="reveal">
+      <div class="info-item-icon">📍</div>
+      <div class="info-item-label">Indirizzo</div>
+      <div class="info-item-val">Via Maglio, 8<br>Gravedona ed Uniti (CO)</div>
+    </div>
+    <div class="reveal">
+      <div class="info-item-icon">📞</div>
+      <div class="info-item-label">Telefono</div>
+      <div class="info-item-val"><a href="tel:+393483618739">348 361 8739</a></div>
+    </div>
+    <div class="reveal">
+      <div class="info-item-icon">💬</div>
+      <div class="info-item-label">WhatsApp</div>
+      <div class="info-item-val"><a href="https://wa.me/393483618739" target="_blank">Scrivici →</a></div>
+    </div>
+    <div class="reveal">
+      <div class="info-item-icon">🗺️</div>
+      <div class="info-item-label">Google Maps</div>
+      <div class="info-item-val"><a href="https://maps.app.goo.gl/C3SCtyeBFgVRmHkB6" target="_blank">Aprire in Maps →</a></div>
+    </div>
+  </div>
+</div>
+
+<section class="orari-section" id="orari">
+  <div class="orari-grid">
+    <div class="reveal">
+      <p class="section-label">Orari</p>
+      <h2 class="section-title" style="font-size:2rem">Quando <em>siamo aperti</em></h2>
+      <table class="orari-table">
+        <tr><td>Lunedì</td><td>07:00 – 20:00</td></tr>
+        <tr><td>Martedì</td><td>07:00 – 20:00</td></tr>
+        <tr><td>Mercoledì</td><td>07:00 – 20:00</td></tr>
+        <tr><td>Giovedì</td><td>07:00 – 20:00</td></tr>
+        <tr><td>Venerdì 🦪</td><td>07:00 – sera</td></tr>
+        <tr><td>Sabato</td><td>07:00 – 20:00</td></tr>
+        <tr><td>Domenica</td><td class="chiuso">Chiuso</td></tr>
+      </table>
+    </div>
+    <div class="reveal">
+      <p class="section-label">Dove siamo</p>
+      <h2 class="section-title" style="font-size:2rem">Nel cuore di <em>Gravedona</em></h2>
+      <div class="map-box">
+        <div style="font-size:2.5rem">📍</div>
+        <p>Via Maglio, 8 — Gravedona ed Uniti</p>
+        <a href="https://maps.app.goo.gl/C3SCtyeBFgVRmHkB6" target="_blank">→ Apri in Google Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p><strong style="color:rgba(255,255,255,0.8)">Petit Bar</strong> · Via Maglio 8, Gravedona ed Uniti (CO) · <a href="tel:+393483618739">348 361 8739</a></p>
+  <p style="margin-top:0.4rem">© 2025 Petit Bar</p>
+</footer>
+
+<script>
+function showTab(name,el){
+  document.querySelectorAll('.tab-content').forEach(t=>t.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+name).classList.add('active');
+  el.classList.add('active');
+}
+const obs=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+</script>
+</body>
+</html>
